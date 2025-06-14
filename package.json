@@ -1,0 +1,14 @@
+{
+  "name": "gcp-redirect-logger",
+  "version": "1.0.0",
+  "description": "A redirect server with logging on GCP Cloud Run.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
