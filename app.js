@@ -23,7 +23,7 @@ app.use((req, res) => {
     };
 
     console.log(JSON.stringify(logEntry));
-    res.redirect(301, destinationUrl);
+    res.redirect(301, landingUrl);
 });
 
 app.listen(PORT, () => {
