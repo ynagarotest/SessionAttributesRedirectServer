@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // リダイレクト先のドメイン
-const REDIRECT_DOMAIN = 'https://ynaggaro.com';
+const REDIRECT_DOMAIN = 'https://ynagaro.com';
 
 // 全てのパスとメソッド(*)に対応するミドルウェア
 app.use((req, res) => {
