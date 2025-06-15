@@ -14,7 +14,7 @@ app.use((req, res) => {
     const fullPathWithQuery = req.originalUrl;
 
     // リダイレクト先の完全なURLを生成
-    // 例: https://ynaggaro.com/items/123?a=b
+    // 例: https://ynagaro.com/items/123?a=b
     const destinationUrl = `${REDIRECT_DOMAIN}${fullPathWithQuery}`;
 
     // Cloud Loggingは、特定のJSON構造を解釈してリッチなログを生成する
