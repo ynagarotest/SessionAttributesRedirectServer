@@ -1,33 +1,26 @@
 const express = require('express');
 const app = express();
 
-// 環境変数からポート番号を取得。なければ8080をデフォルトにする。
 const PORT = process.env.PORT || 8080;
-
-// リダイレクト先のドメイン
 const REDIRECT_DOMAIN = 'https://ynagaro.com';
 
-// 全てのパスとメソッド(*)に対応するミドルウェア
 app.use((req, res) => {
-    // リクエストされたパスとクエリパラメータを取得
-    // req.originalUrl は /path?query=value のような形式
+    
+    const sessionStartTimeUsec = Date.now() * 1000;
     const fullPathWithQuery = req.originalUrl;
-
-    // リダイレクト先の完全なURLを生成
-    // 例: https://ynagaro.com/items/123?a=b
-    const destinationUrl = `${REDIRECT_DOMAIN}${fullPathWithQuery}`;
+    const landingUrl = `${REDIRECT_DOMAIN}${fullPathWithQuery}`;
 
     // Cloud Loggingは、特定のJSON構造を解釈してリッチなログを生成する
     // https://cloud.google.com/logging/docs/structured-logging
     const logEntry = {
         severity: 'INFO',
         message: 'Redirecting request',
-        httpRequest: {
+        sessionAttributes: {
+            queryParams: req.query,
+            landingUrl: landingUrl,
+            sessionStartTimeUsec: sessionStartTimeUsec,
             refererUrl: req.get('Referer'),
-            requestUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
-            landingUrl: destinationUrl,
             userAgent: req.get('User-Agent'),
-            queryParams: req.query
         }
     };
 
