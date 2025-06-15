@@ -23,15 +23,11 @@ app.use((req, res) => {
         severity: 'INFO',
         message: 'Redirecting request',
         httpRequest: {
-            requestMethod: req.method,
+            refererUrl: req.get('Referer'),
             requestUrl: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
+            landingUrl: destinationUrl,
             userAgent: req.get('User-Agent'),
-            referer: req.get('Referer'),
-        },
-        redirectInfo: {
-            sourceHost: req.hostname,
-            destinationUrl: destinationUrl,
-            queryParams: req.query,
+            queryParams: req.query
         }
     };
 
